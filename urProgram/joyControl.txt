@@ -1,0 +1,19 @@
+ Program
+   BeforeStart
+     MoveJ
+       home
+   Robot Program
+     startPose≔get_actual_tcp_pose()
+     r≔d2r(5*(L_upDown-100)/100)
+     p≔d2r(5*(L_leftRright-100)/100)
+     yaw≔d2r(5*(R_leftRight-100)/100)
+     rVector≔rpy2rotvec([r,p,yaw])
+     rx≔rVector[0]
+     ry≔rVector[1]
+     rz≔rVector[2]
+     startPose≔pose_trans(startPose,p[0,0,0,rx,ry,rz])
+     endPose≔pose_trans(startPose,p[0,0,-0.05*(R_upDown-100)/100,0,0,0])
+     MoveJ
+       endPose
+     stopj(20)
+     Wait: 0.1
